@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,user-scalable=no">
+        <style>
+            *{
+                box-sizing: inherit;
+            }
+            body{
+                font-family: sans-serif, Courier, monospace;
+                margin: 0%;
+                padding: 0%;
+                overflow-x: hidden;
+                /* position: relative; */
+                /* overflow: hidden; */
+            }
+            a{
+                text-decoration: none;
+                color: inherit;
+            }
+            #this-svg{
+                position: absolute;
+                top: 50%;
+                transform: translate(-2%,-65%);
+                width: 50%;
+                opacity: 0;
+            }
+            .point{
+                height: 30px;
+                width: 20px;
+                background: #e2be46;
+                float: left;
+            }
+            span{
+                display: block;
+                margin: 20px;
+            }
+            .flex-r{
+                display: flex;
+            }
+            .flex-c{
+                display: flex;
+                flex-direction: column;
+                /* justify-content: center; */
+                /* align-items: center; */
+            }
+            .wrap{
+                flex-wrap: wrap;
+            }
+            #spots{
+                position: absolute;
+                z-index: 1;
+                opacity: 0.85;
+                height: 80%;
+                /* max-height: 100%; */
+                overflow: hidden;
+                padding: 5%;
+                top: 50%;
+                right: 0%;
+                transform: translate(0,-50%); 
+                box-sizing: border-box;
+                border-color: #5d1ec4;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                border-color: #ffffff;
+                background-color: transparent;
+                
+                /* overflow-y: auto; */
+                /* top: 0%; */
+            }
+            #spots div{
+                position: relative;
+                top: 0%;
+                border-radius: 50%;
+                height: 5vw;
+                width: 5vw;
+                margin: 1% 0.7%;
+                transform: translate(-50%,-50%);
+                border: 0.5vw solid saddlebrown;
+                opacity: 0;
+                border-color: inherit;
+                background-color: inherit;
+                transition: border-color 3s linear, background-color 3s linear;
+            }
+            #fadeBackground{
+                /* transition: background-color 1s linear; */
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                z-index: -4;
+                top: -100%;
+                background-color: #5d1ec4;
+            }
+            *:not(canvas){
+                width: 100%;
+            }
+            #intro{
+                user-select: none;
+                position: absolute;
+                height: 100%;
+                /* left: -100%; */
+                /* transform: translate(0,50%); */
+                max-height: 100%;
+                z-index: -1;
+            }
+            #intro>.skills{
+                position: relative;
+                width: 18%;
+                height: 100%;
+                left: -50%;
+                max-height: 100%;
+                /* align-self: center; */
+                /* justify-content: center; */
+                overflow: hidden;
+                height: 100%;
+                background: aliceblue;
+                box-shadow: 0.5vw 0px 8px #3d3d3d;
+            }
+            #intro .coverScroll{
+                display: none;
+                width: 0%;
+            }
+            #intro .skillsContainer{
+                position: relative;
+                padding: 1%;
+                height: 10%;
+                left: -100%;
+                width: 100%;
+                /* pointer-events: none;   */
+                background: aliceblue;        
+            }
+            .skillsContainer img{
+                height: 100%;
+                transform: scale(0.7);
+                
+            }
+
+            #canvas{
+                position: absolute;
+                z-index: -1;
+                background: #e2be46;
+                color: #32153f;
+                top: 0%;
+                right: 0%;
+                display: none;
+            }
+            #sword{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+            #sword svg{
+                height: 35%;
+                
+            }
+            
+            #me{
+                background: #773fd1;
+                color: aliceblue;
+                width: 82%;
+                right: 0%;
+                position: absolute;
+                right: -100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                /* transform: translate(0,-50%); */
+                z-index: 50;
+                font-size: 2vw;
+            }
+            #me>*,
+            #me .info>section{
+                margin: 3% 0% 3% 0%;
+            }
+            #me svg{
+                position: relative;
+                width: 15%;
+            }
+            #me h1,
+            #me h5,
+            #me em{
+                text-align: center;
+                margin: 0%;
+                display: inline;
+                user-select: none;
+            }
+            #me .job-des>h5{
+                margin: 1% 0% 1% 0%;
+            }
+            #me>*,
+            #me .info>section{
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            #me .info h1,
+            #me .info h5{
+                font-weight: normal;
+            }
+            #me .info img{
+                width: 3vw;
+                margin: 0vw 1vw 0vw 1vw;
+            }
+            #me .contact-way,
+            #me .contact-ad{
+                display:flex;
+                flex-direction: row !important;
+            }
+            /* #me .contact-way *，
+            #me .contact-ad *{
+                 width:auto; 
+            } */
+            
+
+            
+
+            @media screen and (min-width:200px) and (max-width:1000px){
+                #spots{
+                    height: 85%;
+                    overflow-y: auto;
+                }
+                #spots div{
+                    width: 8vw;
+                    height: 8vw;
+                    top: 0%;
+                    margin: 1% 11.3% 1% 11.3%;
+                }
+                #intro>.skills{
+                    width: 30%;
+                    overflow-y: auto;
+                    box-shadow: 0.75vw 0px 8px #3d3d3d;
+                    color: #323fad
+                }
+                .skillsContainer img{
+                    transform: scale(0.56);
+                }
+                #intro .coverScroll{
+                    /* float: right; */
+                    display: none;
+                    position: absolute;
+                    width: 4%;
+                    height: 100%;
+                    left: 26%;
+                    background: #873fda;
+                }    
+                #sword svg{
+                    height: 20%;
+                    
+                }
+                #me{
+                    width: 70%
+                }             
+            }
+        </style>
+    </head>
+    <body class="flex-c">
+    <!-- <svg id="this-svg" data-name="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.25 18">
+        <defs><style>
+            .cls-1{fill:none;stroke-miterlimit:10;}
+            .cls-1{stroke:#e2be46;stroke-width:0.25px;}
+        </style></defs><path class="cls-1" d="M10.11,12l-.64.64L5.54,9.37,9.47,6.09l.64.65L6.92,9.36Z"/><path class="cls-1" d="M23.61,12.48a5,5,0,0,1-.71.13,7.3,7.3,0,0,1-.75,0,2.37,2.37,0,0,1-1.65-.5,2,2,0,0,1-.54-1.54V7.54H18.3V6.68h1.65V5.07l1-.26V6.68h2.64v.86H21v3a1.23,1.23,0,0,0,.34.95,1.41,1.41,0,0,0,1,.31,4.74,4.74,0,0,0,.62,0,5.85,5.85,0,0,0,.7-.14Z"/><path class="cls-1" d="M30.19,12.57h-1V8.81a1.68,1.68,0,0,0-.25-1,.86.86,0,0,0-.73-.34,1.28,1.28,0,0,0-.38.06,1.33,1.33,0,0,0-.37.19,3.2,3.2,0,0,0-.42.37q-.23.23-.53.59v3.9h-1V4.29h1v2.4l0,.93a4,4,0,0,1,.47-.48,2.63,2.63,0,0,1,.46-.32,1.85,1.85,0,0,1,.47-.18,2.32,2.32,0,0,1,.5-.05,1.73,1.73,0,0,1,1.36.54,2.35,2.35,0,0,1,.48,1.61Z"/><path class="cls-1" d="M34.07,7.53H32.33V6.68H35.1v5h1.75v.85H32.13v-.85h1.93Zm.36-3.31a.81.81,0,0,1,.32.06.77.77,0,0,1,.25.17.83.83,0,0,1,.17.25.82.82,0,0,1,0,.62.82.82,0,0,1-.17.26.77.77,0,0,1-.25.17.84.84,0,0,1-.63,0,.77.77,0,0,1-.25-.17.82.82,0,0,1-.17-.26.82.82,0,0,1,0-.62.83.83,0,0,1,.17-.25.77.77,0,0,1,.25-.17A.81.81,0,0,1,34.42,4.22Z"/><path class="cls-1" d="M43.32,11a1.4,1.4,0,0,1-.11.56,1.46,1.46,0,0,1-.29.44,1.79,1.79,0,0,1-.42.33,2.8,2.8,0,0,1-.51.22,3.37,3.37,0,0,1-.56.13,4,4,0,0,1-.56,0,10.54,10.54,0,0,1-1.1-.05,7.41,7.41,0,0,1-1-.17v-.94a8.17,8.17,0,0,0,1,.22,6.85,6.85,0,0,0,1,.08,2.27,2.27,0,0,0,1.08-.2.62.62,0,0,0,.35-.57.7.7,0,0,0-.06-.28.65.65,0,0,0-.2-.24,1.93,1.93,0,0,0-.45-.24q-.31-.12-.84-.28A6,6,0,0,1,40,9.73a2.47,2.47,0,0,1-.58-.35A1.52,1.52,0,0,1,39,8.9a1.41,1.41,0,0,1-.14-.65A1.49,1.49,0,0,1,39,7.71a1.46,1.46,0,0,1,.39-.54,2.17,2.17,0,0,1,.74-.42,3.53,3.53,0,0,1,1.17-.17q.35,0,.77,0a7.93,7.93,0,0,1,.88.13v.91A8.4,8.4,0,0,0,42,7.48a5.94,5.94,0,0,0-.75-.06,3,3,0,0,0-.64.06,1.33,1.33,0,0,0-.42.16.63.63,0,0,0-.23.24.64.64,0,0,0-.07.3.66.66,0,0,0,.06.29.69.69,0,0,0,.23.25,2.25,2.25,0,0,0,.47.24q.3.12.78.26a6.23,6.23,0,0,1,.88.32,2.27,2.27,0,0,1,.58.37,1.2,1.2,0,0,1,.32.46A1.66,1.66,0,0,1,43.32,11Z"/><path class="cls-1" d="M52.14,6.74l.63-.65,3.94,3.29-3.94,3.29L52.14,12l3.19-2.63Z"/>
+    </svg> -->
+    <main id="fadeBackground"></main>
+    <main class="flex-c wrap" id="sword">
+        <svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><style>.cls-1{fill:none;stroke:#3f3f3f;stroke-miterlimit:10;}</style></defs><title>sword</title><path class="cls-1" d="M52.81,104a3.08,3.08,0,0,0-4.36,0c-9.15,9.15-9.33,19.2-.62,28.39L28.34,151.86l-3.21-3.18a6.17,6.17,0,0,0-8.71,0l-7.18,7.19a6.17,6.17,0,0,0,0,8.73l26.18,26.18a6.18,6.18,0,0,0,8.73,0l7.18-7.18A5.89,5.89,0,0,0,53,178.75a7.76,7.76,0,0,0-2.36-4.62l-2.5-2.49,19.47-19.46c9.32,8.87,19.12,8.65,28.4-.63a3.08,3.08,0,0,0,0-4.36Zm18.5,43.18-1.56-1.53a3.09,3.09,0,0,0-4.35,0L43.77,167.29l-4.86-4.84a3.09,3.09,0,0,0-4.36,4.37L46.28,178.5c.46.45.57.81.67.73l-7.17,7.16L13.6,160.21l7.18-7.16,5.4,5.36a3.09,3.09,0,0,0,4.35,0l21.63-21.64,5.54,5.55A3.09,3.09,0,0,0,62.07,138l-9.26-9.28c-3.47-3.47-5.23-6.88-5.24-10.13a12.84,12.84,0,0,1,3.18-7.88l38.6,38.6c-6.13,4.87-11.78,4.19-18-2.08Zm35.77-75.85a3.08,3.08,0,0,1,0-4.36L159.53,14.5a3.08,3.08,0,0,1,1.51-.83L188.81,7.5a3.13,3.13,0,0,1,.56-.05l.15,0a3.17,3.17,0,0,1,1,.2l.22.1a2.76,2.76,0,0,1,1.52,1.52c0,.07.07.14.1.21a3.1,3.1,0,0,1,.2,1s0,.09,0,.14a3.17,3.17,0,0,1,0,.57L186.33,39a3.09,3.09,0,0,1-.83,1.51L133,92.92a3.08,3.08,0,1,1-4.36-4.36L180.5,36.74l3.68-16.55L122.24,82.12a3.09,3.09,0,1,1-4.36-4.36l61.94-61.94L163.26,19.5,111.44,71.32a3.08,3.08,0,0,1-4.36,0Zm76.51,77.35c-2.17-2.18-6.12-2.64-9.45.69l-2.48,2.49-19.47-19.46c8.87-9.31,8.65-19.12-.63-28.4a3.08,3.08,0,0,0-4.36,0L104,147.19a3.08,3.08,0,0,0,0,4.36c9.15,9.15,19.21,9.33,28.39.62l19.49,19.49-3.18,3.21a6.16,6.16,0,0,0,0,8.71l7.18,7.18a6.18,6.18,0,0,0,8.73,0l26.18-26.18a6.18,6.18,0,0,0,0-8.73ZM160.22,186.4l-7.16-7.18,5.36-5.4a3.09,3.09,0,0,0,0-4.35l-21.64-21.64,5.55-5.54a3.09,3.09,0,1,0-4.36-4.37l-9.28,9.26c-3.47,3.47-6.88,5.23-10.13,5.24h0a12.83,12.83,0,0,1-7.86-3.18l38.6-38.6c4.88,6.12,4.18,11.77-2.09,18l-1.53,1.55a3.09,3.09,0,0,0,0,4.35l21.64,21.64-4.85,4.86a3.09,3.09,0,0,0,4.38,4.35l11.68-11.73c.46-.45.8-.57.73-.67l7.16,7.17ZM7.44,10.48a3.07,3.07,0,0,1,.2-1c0-.07.06-.14.1-.21A2.75,2.75,0,0,1,9.25,7.73l.21-.1a3.15,3.15,0,0,1,1-.2l.15,0a3.12,3.12,0,0,1,.56.05L39,13.67a3.08,3.08,0,0,1,1.51.83L133,107.07a3.08,3.08,0,1,1-4.36,4.36L36.74,19.5,20.19,15.83l102,102a3.09,3.09,0,0,1-4.36,4.36l-102-102L19.5,36.74l91.93,91.93a3.08,3.08,0,0,1-4.36,4.36L100,126,92.92,133a3.08,3.08,0,1,1-4.36-4.36l7.08-7.08-6.44-6.44-7.08,7.08a3.09,3.09,0,1,1-4.36-4.36l7.08-7.08-6.44-6.44-7.08,7.08A3.09,3.09,0,1,1,67,107.07L74,100,14.51,40.47A3.1,3.1,0,0,1,13.67,39L7.5,11.18a3.23,3.23,0,0,1,0-.57s0-.09,0-.14Zm0,0"/>
+        </svg>
+        <p style="text-align:center; color:#a0a0a0">click this</p>     
+    </main>
+    <main id="intro" class="flex-r">
+        <section class="flex-r wrap skills">
+            <div v-for="url in svgURL" class="skillsContainer">
+                <img :src="url" draggable="false">
+            </div>
+        </section>
+        <section id="spots" class="flex-r">
+            <div v-for="item in spots" draggable="false"></div>
+        </section>
+        <!-- <canvas id="canvas"></canvas> -->
+        <!-- <div class="coverScroll"></div> -->
+    </main>
+    <main id="me">
+        <section>
+            <h1>Introduction</h1>
+            <h5>@misaki asakura</h5>
+        </section>
+        <svg id="me-svg" data-name="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><style>.cls-1{fill:none;stroke:#5ed2ff;stroke-miterlimit:10;stroke-width:3px;}</style></defs><title>me</title><path class="cls-1" d="M122.91,58.13a8.35,8.35,0,1,0,8,8.34A8.19,8.19,0,0,0,122.91,58.13Zm-44.82,0a8.35,8.35,0,1,0,8,8.34A8.19,8.19,0,0,0,78.09,58.13Z"/><path class="cls-1" d="M165.94,76.56c0-35.1-29.38-63.69-65.45-63.69S35,41.46,35,76.56c0,25.35,15.31,47.23,37.42,57.46-1.19,1.86-2.32,3.63-3.34,5.39l0,0c-8.71,14.9-10.8,26.33-6.21,34.63,5.21,9.45,17.95,13.81,40,13.81h1.56c20.53-.21,32.66-4.53,38.14-13.69,5.7-9.53,3.24-23.34-7.6-42.32l-.57-.92C153.3,119.73,165.94,99.57,165.94,76.56Zm-40,40.06a16.67,16.67,0,0,0-5.72,22.95l.45.72c8.2,14.41,9.26,22.66,7.66,25.31s-8.67,5.43-23.83,5.59H103c-17.81,0-24.37-3.28-25.45-5.21-.63-1.11-.74-6.56,6-18.14.2-.33.37-.66.55-1,.78-1.29,1.62-2.6,2.36-3.75a16.66,16.66,0,0,0-7-24.16C62.6,111.11,51.7,94.49,51.7,76.58c0-25.94,21.88-47,48.77-47s48.77,21.09,48.77,47C149.28,92.95,140.57,107.91,126,116.62Z"/></svg>
+        <section class="info">
+            <section class="job-des">
+                <h5>Job Objective: <em>web intern/web engineer</em></h5>
+                <h5>Skills Describe: on the left <-</h5>
+            </section>
+            <section class="contact-way">
+                <h5>13927513466</h5><img src="./dist/svg/mobile.svg">
+                <a href="#"><h5>275684857@qq.com</h5></a><img src="./dist/svg/email.svg">
+            </section>
+            <section class="contact-ad">
+                <h5>adress: 广东技术师范大学白云校区</h5><img src="./dist/svg/adress.svg">
+            </section>
+        </section>
+    </main>
+    <!-- <a href="./pages">p</a> -->
+    <!--  -->
+    <script src="./dist/pixi.min.js"></script>
+    <script src="./dist/anime.min.js"></script>
+    <script src="./dist/vue.min.js"></script>
+    <script src="./dist/index.js"></script>
+    </body>
+</html>
